@@ -103,7 +103,7 @@ header h1 {
     align-items: center;
 }
 
-form {
+.form {
     height: 500px;
     width: 500px;
     background-color: white;
@@ -123,3 +123,6 @@ fieldset {
     align-items: center;
 }
 
+.completion {
+    text-align: center;
+}
