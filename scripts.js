@@ -1,6 +1,7 @@
 const books = [];
 const add = document.querySelector(".add");
 const library = document.querySelector(".library");
+const body = document.querySelector("body");
 
 function Book(name, author, pages, finished) {
     this.name = name;
@@ -22,8 +23,9 @@ function createBookElement(book) {
     remove.setAttribute("class", "remove");
     remove.innerHTML = "Remove Book";
     remove.addEventListener("click", () => {
+        removeBookFromLibrary(book);
         card.remove();
-    })
+    });
     card.appendChild(remove);
 
     let name = document.createElement("h2");
@@ -53,10 +55,53 @@ function createBookElement(book) {
     library.appendChild(card);
 }
 
+function removeBookFromLibrary(book) {
+    books.splice(books.indexOf(book), 1);
+}
+
+function prompt() {
+    let popup = document.createElement("div");
+    popup.setAttribute("class", "popup");
+    form(popup);
+    body.appendChild(popup);
+}
+
+function form(popup) {
+    let form = document.createElement("form");
+
+    let cancel = document.createElement("button");
+    cancel.setAttribute("class", "cancel");
+    cancel.innerHTML = "X";
+    form.append(cancel);
+
+    let fieldset = document.createElement("fieldset");
+    fieldset.innerHTML = "New Book";
+    form.appendChild(fieldset);
+
+    let name = document.createElement("input");
+    fieldset.appendChild(name);
+
+    let author = document.createElement("input");
+    fieldset.appendChild(author);
+
+    let pages = document.createElement("input");
+    fieldset.appendChild(pages);
+
+    let finished = document.createElement("input");
+    fieldset.appendChild(finished);
+
+    let submit = document.createElement("button");
+    form.appendChild(submit);
+
+    popup.appendChild(form);
+}
+
 add.addEventListener("click", event => {
+    prompt();
     let book = new Book("Book name", "Author", books.length, false);
     addBookToLibrary(book);
     console.log(books);
+    console.log(body);
 });
 
 const cat = new Book("The Cat in the Hat", "Dr Seuss", 61, true);
