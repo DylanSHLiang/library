@@ -48,7 +48,7 @@ table {
 }
 
 body {
-    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
 header {
@@ -60,12 +60,11 @@ header {
 
 header h1 {
     font-size: 30px;
-    font-family: sans-serif;
     font-weight: bold;
 }
 
 .container {
-    background-color: #d3d3d3;
+    background: radial-gradient(#14b8a6, #0891b2);
     min-height: calc(100vh - 130px);
     display: flex;
     flex-direction: column;
@@ -76,19 +75,76 @@ header h1 {
 .add {
     margin-bottom: 40px;
     padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    background-color: #4338ca;
+    color: white;
+    font-weight: bold;
+    transition-duration: 0.2s;
+}
+
+.add:hover {
+    transition-duration: 0.2s;
+    transform: scale(1.05);
+    box-shadow: 1px 2px 1px #000000;
+    cursor: pointer;
 }
 
 .library {
     width: 80%;
     display: grid;
-    grid-template-columns: repeat(auto-fit, 200px);
+    grid-template-columns: repeat(auto-fit, 300px);
     justify-content: center;
-    gap: 20px;
+    gap: 30px;
 }
 
 .book {
-    background-color: white;
+    background-color: rgb(247, 247, 247);
     padding: 20px;
+    display: grid;
+    grid-template-rows: 2fr 1fr 1fr 50px 50px;
+    gap: 10px;
+    border-radius: 5px;
+    box-shadow: 3px 3px 3px #242424;
+}
+
+.book h2 {
+    font-size: 20px;
+}
+
+.book h3 {
+    margin-bottom: 20px;
+}
+
+.book .finished[finished="true"] {
+    background-color: #02aa6a;
+    transition-duration: .2s;
+}   
+
+.book .finished[finished="false"] {
+    background-color: #c23131;
+    transition-duration: .2s;
+} 
+
+.book .remove {
+    background-color: #979797;
+    font-size: 15px;
+}
+
+.book .remove, .book .finished {
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+    border-radius: 10px;
+    height: 50px;
+    border: none;
+    font-weight: bold;
+}
+
+.book .remove:hover, .book .finished:hover {
+    box-shadow: 0 0 2px #000000;
+    transition-duration: .2s;
+    cursor: pointer;
 }
 
 .popup {
@@ -104,25 +160,61 @@ header h1 {
 }
 
 .form {
-    height: 500px;
-    width: 500px;
+    height: 300px;
+    width: 250px;
     background-color: white;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    border-radius: 5px;
+    padding: 10px;
 }
 
 .cancel {
-    position: relative;
+    align-self: flex-end;
+    justify-self: start;
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: #f72828;
+    border-radius: 5px;
+    border: none;
 }
 
 fieldset {
+    margin-top: -30px;
+    font-size: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    height: 230px;
 }
 
-.completion {
-    text-align: center;
+fieldset label {
+    font-size: 15px;
+    margin: 10px;
+}
+
+.form button {
+    margin-bottom: 10px;
+}
+
+.form button:not(.cancel){
+    padding: 5px 10px;
+    background-color: #15803d;
+    border-radius: 5px;
+    font-size: 18px;
+    border: none;
+    font-weight: 500;
+    color: white;
+}
+
+.form button:hover {
+    box-shadow: 0 0 5px rgb(122, 122, 122);
 }

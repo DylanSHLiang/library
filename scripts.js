@@ -19,15 +19,6 @@ function createBookElement(book) {
     let card = document.createElement("div");
     card.setAttribute("class", "book");
 
-    let remove = document.createElement("button");
-    remove.setAttribute("class", "remove");
-    remove.innerText = "Remove Book";
-    remove.addEventListener("click", () => {
-        removeBookFromLibrary(book);
-        card.remove();
-    });
-    card.appendChild(remove);
-
     let name = document.createElement("h2");
     name.setAttribute("class", "name");
     name.innerText = book.name;
@@ -35,22 +26,46 @@ function createBookElement(book) {
 
     let author = document.createElement("h3");
     author.setAttribute("class", "author");
-    author.innerText = book.author;
+    author.innerText = "by " + book.author;
     card.appendChild(author);
 
     let pages = document.createElement("p");
     pages.setAttribute("class", "pages");
-    pages.innerText = book.pages;
+    if (book.pages == 1) {
+        pages.innerText = book.pages + " page";
+    } else {
+        pages.innerText = book.pages + " pages";
+    }
     card.appendChild(pages);
 
     let finished = document.createElement("button");
     finished.setAttribute("class", "finished");
     if (book.finished) {
         finished.innerText = "Finished";
+        finished.setAttribute("finished", true);
     } else {
         finished.innerText = "Not Finished";
+        finished.setAttribute("finished", false);
     }
+    finished.addEventListener("click", () => {
+        if (book.finished) {
+            book.finished = false;
+            finished.setAttribute("finished", false);
+        } else {
+            book.finished = true;
+            finished.setAttribute("finished", true);
+        }
+    });
     card.appendChild(finished);
+
+    let remove = document.createElement("button");
+    remove.setAttribute("class", "remove");
+    remove.innerText = "Remove";
+    remove.addEventListener("click", () => {
+        removeBookFromLibrary(book);
+        card.remove();
+    });
+    card.appendChild(remove);
     
     library.appendChild(card);
 }
@@ -110,7 +125,7 @@ function createFormElement(popup) {
 function createCancelElement(form, popup) {
     let cancel = document.createElement("button");
     cancel.setAttribute("class", "cancel");
-    cancel.innerText = "Cancel";
+    cancel.innerText = "X";
     cancel.addEventListener("click", () => {
         popup.remove();
     });
@@ -151,6 +166,7 @@ function createPagesElement(fieldset) {
     pages.setAttribute("type", "number");
     pages.setAttribute("id", "pages");
     pages.setAttribute("name", "pages");
+    pages.setAttribute("min", 1)
     fieldset.appendChild(pagesLabel);
     fieldset.appendChild(pages);
     return pages;
@@ -161,9 +177,3 @@ add.addEventListener("click", event => {
     console.log(books);
     console.log(body);
 });
-
-const cat = new Book("The Cat in the Hat", "Dr Seuss", 61, true);
-const eggs = new Book("Green Eggs and Ham", "Dr Seuss", 72, false);
-
-addBookToLibrary(cat);
-addBookToLibrary(eggs);
