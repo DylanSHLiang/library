@@ -83,9 +83,24 @@ function createFormElement(popup) {
     let submit = document.createElement("button");
     submit.innerText = "Add Book";
     submit.addEventListener("click", () => {
-        let book = new Book(name.value, author.value, pages.value, false);
-        addBookToLibrary(book);
-        popup.remove();
+        if (name.value && author.value && pages.value) {
+            let book = new Book(name.value, author.value, pages.value, false);
+            addBookToLibrary(book);
+            popup.remove();
+        } else {
+            if (!pages.value) {
+                pages.setCustomValidity("Required");
+                pages.reportValidity();
+            }
+            if (!author.value) {
+                author.setCustomValidity("Required");
+                author.reportValidity();
+            }
+            if (!name.value) {
+                name.setCustomValidity("Required");
+                name.reportValidity();
+            }
+        }
     });
     form.appendChild(submit);
 
